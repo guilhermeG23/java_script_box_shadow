@@ -1,0 +1,106 @@
+<style>
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    .caixa {
+        width: 100%;
+        height: 100%;
+    }
+    .alinhamento_caixa_sombra {
+        width: 100%;
+        height: 100%;
+        display: grid;
+    }
+    .caixa_sombra {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        box-shadow: inset 0px 0px 25px 0px black;
+        margin: auto;
+        border-radius: 10px;
+    }
+    .caixa_sombra:hover {
+        box-shadow: inset 0px 0px 25px 0px black !important;
+    }
+
+</style>
+
+<body>
+    <div class="caixa" id="caixa">
+        <div class="alinhamento_caixa_sombra">
+            <div class="caixa_sombra" id="caixa_sombra">
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    let box = document.getElementById('caixa');
+
+    window.addEventListener('mousemove', function(e) {
+        var mouse = {
+            page: {
+                x: e.pageX,
+                y: e.pageY
+            },
+            client: {
+                x: e.clientX,
+                y: e.clientY
+            }
+        };
+
+        let meio_tamanho_da_tela = box.offsetWidth / 2;
+        let meia_altura_da_tela = box.offsetHeight / 2;
+
+        ['client'].map(function(type) {
+            if (
+                (mouse[type].x >= (meio_tamanho_da_tela * 0.9)) && 
+                (mouse[type].x <= (meio_tamanho_da_tela * 1.1)) && 
+                (mouse[type].y <= (meia_altura_da_tela * 0.9)) 
+            ) {
+                document.getElementById("caixa_sombra").style.boxShadow = "0px 10px black";
+            } else 
+            if (
+                (mouse[type].x >= (meio_tamanho_da_tela * 0.9)) && 
+                (mouse[type].x <= (meio_tamanho_da_tela * 1.1)) && 
+                (mouse[type].y >= (meia_altura_da_tela * 1.1)) 
+            ) {
+                document.getElementById("caixa_sombra").style.boxShadow = "0px -10px black";
+            } else 
+            if (
+                (mouse[type].x >= (meio_tamanho_da_tela * 1.1)) && 
+                (mouse[type].y >= (meia_altura_da_tela * 0.9)) &&
+                (mouse[type].y <= (meia_altura_da_tela * 1.1)) 
+            ) {
+                document.getElementById("caixa_sombra").style.boxShadow = "-10px 0px black";
+            } else 
+            if (
+                (mouse[type].x <= (meio_tamanho_da_tela * 1.1)) && 
+                (mouse[type].y >= (meia_altura_da_tela * 0.9)) &&
+                (mouse[type].y <= (meia_altura_da_tela * 1.1)) 
+            ) {
+                document.getElementById("caixa_sombra").style.boxShadow = "10px 0px black";
+            } else 
+            if ((mouse[type].x <= meio_tamanho_da_tela)  && (mouse[type].y <= meia_altura_da_tela)) {
+                document.getElementById("caixa_sombra").style.boxShadow = "10px 10px black";
+            } else 
+            if ((mouse[type].x >= meio_tamanho_da_tela)  && (mouse[type].y <= meia_altura_da_tela)) {
+                document.getElementById("caixa_sombra").style.boxShadow = "-10px 10px black";
+            }
+            else 
+            if ((mouse[type].x >= meio_tamanho_da_tela)  && (mouse[type].y >= meia_altura_da_tela)) {
+                document.getElementById("caixa_sombra").style.boxShadow = "-10px -10px black";
+            } else 
+            if ((mouse[type].x <= meio_tamanho_da_tela)  && (mouse[type].y >= meia_altura_da_tela)) {
+                document.getElementById("caixa_sombra").style.boxShadow = "10px -10px black";
+            }
+        });
+
+    });
+
+
+
+</script>
